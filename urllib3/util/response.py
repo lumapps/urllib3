@@ -51,7 +51,8 @@ def assert_header_parsing(headers):
 
     # This will fail silently if we pass in the wrong kind of parameter.
     # To make debugging easier add an explicit check.
-    if not isinstance(headers, httplib.HTTPMessage):
+    if (not isinstance(headers, httplib.HTTPMessage)
+          and not (headers and headers.__module__ + '.' + headers.__class__.__name__ == 'httplib.HTTPMessage')):
         raise TypeError('expected httplib.Message, got {0}.'.format(
             type(headers)))
 
